@@ -5,23 +5,16 @@ import {useState} from 'react'
 import Button from '../common/button'
 import Input from '../common/input'
 
-const SearchForm = () => {
-    const [result, setResult] = useState('Initial search query')
+const SearchForm = ({initialValue, handleSubmit}) => {
+    const [result, setResult] = useState(initialValue)
 
-    const onSearch = (event) => {
-        event.preventDefault()
-
-        const inputEl = event.target.querySelector('input')
-
-        setResult(inputEl.value)
-        inputEl.value = ''
-    }
+    const onSubmit = (event) => handleSubmit(event, setResult)
 
     return (
         <div>
             <h2>Search form</h2>
-            <form onSubmit={onSearch} className="form">
-                <Input defaultValue={result} />
+            <form onSubmit={onSubmit} className="form">
+                <Input defaultValue={initialValue} />
                 <Button text="search" />
             </form>
             <p>{result}</p>
