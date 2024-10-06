@@ -1,23 +1,19 @@
 import './style.css'
 
-import {useState} from 'react'
-
 import Button from '../common/button'
 import Input from '../common/input'
 
-const SearchForm = ({initialValue, handleSubmit}) => {
-    const [result, setResult] = useState(initialValue)
-
-    const onSubmit = (event) => handleSubmit(event, setResult)
+const SearchForm = ({placeholderText}) => {
+	const onSubmit = (event) => {
+		event.preventDefault()
+	}
 
     return (
         <div>
-            <h2>Search form</h2>
             <form onSubmit={onSubmit} className="form">
-                <Input defaultValue={initialValue} />
+                <Input placeholderText={placeholderText} />
                 <Button text="search" />
             </form>
-            <p>{result}</p>
         </div>
     )
 }
