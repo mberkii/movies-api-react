@@ -2,14 +2,10 @@ import React, {useState} from 'react'
 
 import './style.css'
 
-const MovieTile = ({details, selectMovie}) => {
+const MovieTile = ({details, onClick}) => {
     const [showMovieActions, setShowMovieActions] = useState(false)
     const onMovieActionsToggleClick = () => setShowMovieActions(!showMovieActions)
-    const onMovieTileClick = (event) => {
-        event.preventDefault()
-        selectMovie(details)
-        window.scrollTo(0, 0)
-    }
+    const onMovieTileClick = (event) => onClick(event, details)
 
     return (
         <div className='movie-tile'>

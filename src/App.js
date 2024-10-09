@@ -84,7 +84,7 @@ function App() {
 	const [selectedMovie, setSelectedMovie] = useState();
 	const [sortedBy, setSortedBy] = useState();
 
-	const sortMovies = () => {
+	const getSortedMovies = () => {
 		if (sortedBy === 'title') {
 			return movies.sort((prev, next) => prev.name.localeCompare(next.name))
 		}
@@ -92,12 +92,18 @@ function App() {
 		return movies.sort((prev, next) => prev.releaseYear - next.releaseYear)
 	}
 
-	const moviesList = sortedBy ? sortMovies() : movies
+	const moviesList = sortedBy ? getSortedMovies() : movies
 
 	const onSelect = (event) => {
 		event.preventDefault()
 		setSelectedGenre(event.target.dataset.name)
 	}
+
+    const onMovieTileClick = (event, details) => {
+        event.preventDefault()
+        setSelectedMovie(details)
+        window.scrollTo(0, 0)
+    }
 
   	return (
 		<div className="App">
@@ -114,7 +120,7 @@ function App() {
 				<p className="text-left mb-2"><b>{movies?.length}</b> movies found</p>
 				<div className="d-flex">
 					{moviesList.map((movie) =>
-						<MovieTile key={movie.id} details={movie} selectMovie={setSelectedMovie}/>
+						<MovieTile key={movie.id} details={movie} onClick={onMovieTileClick}/>
 					)}
 				</div>
 			</div>
