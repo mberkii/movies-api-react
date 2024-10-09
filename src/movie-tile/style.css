@@ -3,7 +3,11 @@
     width: 100%;
     margin-bottom: 40px;
     position: relative;
-    cursor: pointer;
+}
+
+.movie-tile a {
+    text-decoration: none;
+    color: inherit;
 }
 
 .movie-title {
