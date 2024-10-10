@@ -1,7 +1,12 @@
 import './style.css'
 
-const Input = ({placeholderText}) => {
-    return <input placeholder={placeholderText} className="input" />
+const Input = ({name, attributes, labelText}) => {
+    return (
+        <>
+            <label htmlFor={name}>{labelText}</label>
+            <input id={name} {...attributes} className="input" />
+        </>
+    )
 }
 
 export default Input

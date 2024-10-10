@@ -11,7 +11,7 @@ const SearchForm = ({placeholderText}) => {
     return (
         <div>
             <form onSubmit={onSubmit} className="form">
-                <Input placeholderText={placeholderText} />
+                <Input attributes={{placeholder: placeholderText}} />
                 <Button text="search" />
             </form>
         </div>

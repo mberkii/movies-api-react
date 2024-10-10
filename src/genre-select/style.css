@@ -1,8 +1,6 @@
 .genre-container {
     width: 100%;
-    max-width: 56%;
-    display: flex;
-    justify-content: space-between;
+    max-width: 70%;
 }
 
 .genre-link {
@@ -11,8 +9,6 @@
     line-height: 19.5px;
     text-align: left;
     text-transform: uppercase;
-    color: #FFFFFF;
-    text-decoration: none;
 }
 
 .genre-link.active {

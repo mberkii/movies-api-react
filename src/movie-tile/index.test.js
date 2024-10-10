@@ -6,13 +6,17 @@ import MovieTile from ".";
 const mockMovieDetails = {
     id: '000',
     name: 'Pulp Fiction',
-    releaseYear: '1994',
+    releaseDate: '1994-01-01',
     image: './assets/pulp-fiction.png',
     genres: ['Action & Adventure'],
     duration: '2hrs',
     description: 'Lorem ipsum..............',
     rating: '9.0'
 }
+
+jest.mock('react-router-dom', () => ({
+    Link: () => <div data-testid="link" />
+}))
 
 test('should render movie tile component', () => {
     render(<MovieTile details={mockMovieDetails} selectMovie={() => {}} />)
@@ -26,13 +30,12 @@ test('should show/hide movie actions menu', () => {
 
     userEvent.click(menuShowButton)
 
-    expect(screen.getByText(/edit/i)).toBeInTheDocument()
-    expect(screen.getByText(/delete/i)).toBeInTheDocument()
+    expect(screen.getAllByTestId('link')[0]).toBeInTheDocument()
+    expect(screen.getAllByTestId('link')[1]).toBeInTheDocument()
 
     const menuCloseButton = screen.getAllByRole('button')[1]
 
     userEvent.click(menuCloseButton)
     
-    expect(screen.queryByText(/edit/i)).not.toBeInTheDocument()
-    expect(screen.queryByText(/delete/i)).not.toBeInTheDocument()
+    expect(screen.queryByTestId('link')).not.toBeInTheDocument()
 })

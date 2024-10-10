@@ -1,88 +1,26 @@
 import './App.css'
 
-import {useState} from 'react'
+import {useState, useRef} from 'react'
+import { Route, Routes, useNavigate } from 'react-router-dom'
+
+import { useMoviesContext } from './contexts'
 
 import Header from './header'
 import GenreSelect from './genre-select'
 import SortControl from './sort-control'
 import MovieTile from './movie-tile'
-
-const movies = [
-    {
-        id: '000',
-        name: 'Pulp Fiction',
-        releaseYear: '1994',
-        image: require('./assets/pulp-fiction.png'),
-        genres: ['Action & Adventure'],
-		duration: '2hrs',
-		description: 'Lorem ipsum..............',
-		rating: '9.0'
-    },
-    {
-        id: '001',
-        name: 'Bohemian Rhapsody',
-        releaseYear: '2018',
-        image: require('./assets/bohemian-rhapsody.png'),
-        genres: ['Drama', 'Biography', 'Music'],
-		duration: '2hrs',
-		description: 'Lorem ipsum..............',
-		rating: '9.0'
-    },
-    {
-        id: '002',
-        name: 'Kill Bill: Vol. 2',
-        releaseYear: '2004',
-        image: require('./assets/kill-bill.png'),
-        genres: ['Oscar Winning Movie'],
-		duration: '2hrs',
-		description: 'Lorem ipsum..............',
-		rating: '9.0'
-    },
-    {
-        id: '003',
-        name: 'Avengers: Infinity Wars',
-        releaseYear: '2018',
-        image: require('./assets/avengers.png'),
-        genres: ['Action & Adventure'],
-		duration: '2hrs',
-		description: 'Lorem ipsum..............',
-		rating: '9.0'
-    },
-    {
-        id: '004',
-        name: 'Inception',
-        releaseYear: '2010',
-        image: require('./assets/inception.png'),
-        genres: ['Action & Adventure'],
-		duration: '2hrs',
-		description: 'Lorem ipsum..............',
-		rating: '9.0'
-    },
-    {
-        id: '005',
-        name: 'Reservoir Dogs',
-        releaseYear: '1992',
-        image: require('./assets/reservoir-dogs.png'),
-        genres: ['Oscar Winning Movie'],
-		duration: '2hrs',
-		description: 'Lorem ipsum..............',
-		rating: '9.0'
-    }
-]
-
-const genres = [
-	{id: '000', name: 'all'},
-	{id: '001', name: 'documentary'},
-	{id: '002', name: 'horror'},
-	{id: '003', name: 'crime'},
-	{id: '004', name: 'comedy'},
-	{id: '005', name: 'romance'}
-]
+import Dialog from './dialog'
+import MovieForm from './movie-form'
+import DeleteNote from './delete-note'
 
 function App() {
-    const [selectedGenre, setSelectedGenre] = useState(genres[0].name);
-	const [selectedMovie, setSelectedMovie] = useState();
-	const [sortedBy, setSortedBy] = useState();
+	const {genres, movies, updateMovie, addMovie} = useMoviesContext()
+    const [selectedGenre, setSelectedGenre] = useState(genres[0].name)
+	const [selectedMovie, setSelectedMovie] = useState()
+	const [sortedBy, setSortedBy] = useState()
+
+	const movieToEditRef = useRef()
+	const navigate = useNavigate()
 
 	const getSortedMovies = () => {
 		if (sortedBy === 'title') {
@@ -92,8 +30,11 @@ function App() {
 		return movies.sort((prev, next) => prev.releaseYear - next.releaseYear)
 	}
 
+	const getMovieToEditDetails = () => movies.find((movie) => movie.id === movieToEditRef.current)
+
 	const moviesList = sortedBy ? getSortedMovies() : movies
 
+	const onClose = () => navigate('/')
 	const onSelect = (event) => {
 		event.preventDefault()
 		setSelectedGenre(event.target.dataset.name)
@@ -105,11 +46,57 @@ function App() {
         window.scrollTo(0, 0)
     }
 
+	const createMovieData = (event, movieId) => {
+		event.preventDefault()
+
+		const form = event.currentTarget
+
+		return {
+			id: movieId || window.crypto.randomUUID(),
+			name: form.title.value,
+			releaseDate: form.date.value,
+			image: form.url.value,
+			genres: [form.genre.value],
+			duration: form.time.value,
+			description: form.overview.value,
+			rating: form.rating.value
+		}
+	}
+
+	const onMovieEditSubmit = (event, movieId) => {
+		const dataToSend = createMovieData(event, movieId)
+
+		updateMovie(dataToSend)
+		onClose()
+	}
+
+	const onMovieAddSubmit = (event) => {
+		const dataToSend = createMovieData(event)
+
+		addMovie(dataToSend)
+		onClose()
+	}
+
   	return (
 		<div className="App">
+			<Routes>
+				<Route
+					path='/add'
+					element={<Dialog title="Add movie" content={<MovieForm onSubmit={onMovieAddSubmit} />} onClose={onClose}/>}
+				/>
+				<Route
+					path='/:id/edit'
+					element={<Dialog title="Edit movie" content={<MovieForm details={getMovieToEditDetails()} onSubmit={onMovieEditSubmit} />} onClose={onClose} />} 
+				/>
+				<Route
+					path='/:id/delete'
+					element={<Dialog title="Delete movie" content={<DeleteNote />} onClose={onClose}/>}
+				/>
+			</Routes>
+
 			<Header movieDetails={selectedMovie}/>
 			<div className='main'>
-				<div className='d-flex mb-2 nav'>
+				<div className='d-flex space-between mb-2 nav'>
 					<GenreSelect
 						genres={genres}
 						selected={selectedGenre}
@@ -118,9 +105,9 @@ function App() {
 					<SortControl setSortedBy={setSortedBy} />
 				</div>
 				<p className="text-left mb-2"><b>{movies?.length}</b> movies found</p>
-				<div className="d-flex">
+				<div className="d-flex movies-grid">
 					{moviesList.map((movie) =>
-						<MovieTile key={movie.id} details={movie} onClick={onMovieTileClick}/>
+						<MovieTile key={movie.id} details={movie} onClick={onMovieTileClick} movieToEditRef={movieToEditRef}/>
 					)}
 				</div>
 			</div>

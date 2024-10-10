@@ -1,13 +1,19 @@
 .movie-tile {
-    max-width: 320px;
+    max-width: 33.33%;
     width: 100%;
     margin-bottom: 40px;
     position: relative;
 }
 
-.movie-tile a {
-    text-decoration: none;
-    color: inherit;
+.movie-tile>a {
+    display: block;
+    max-width: 320px;
+    width: 100%;
+    margin: auto;
+}
+
+.movie-tile img {
+    width: 100%;
 }
 
 .movie-title {
@@ -29,13 +35,12 @@
     display: none;
     position: absolute;
     top: 12px;
-    right: 12px;
+    right: 32px;
     width: 36px;
     height: 36px;
     border: none;
     border-radius: 100%;
     background-color: #2A202D;
-    cursor: pointer;
 }
 
 .movie-actions-toggle:after {
@@ -58,7 +63,7 @@
 .movie-actions {
     position: absolute;
     top: 12px;
-    right: 12px;
+    right: 32px;
     max-width: 190px;
     width: 100%;
     padding: 16px 0;
@@ -67,22 +72,9 @@
 
 .movie-actions a {
     display: block;
-    color: #FFF;
     padding: 12px 0;
-    text-decoration: none;
-    cursor: pointer;
 }
 
 .movie-actions a:hover {
     background-color: #F65261;
-}
-
-.close-btn {
-    position: absolute;
-    top: 4px;
-    right: 8px;
-    background: transparent;
-    border: none;
-    color: #FFF;
-    cursor: pointer;
 }
