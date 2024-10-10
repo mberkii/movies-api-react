@@ -1,0 +1,24 @@
+.sort-control {
+    text-transform: uppercase;
+    gap: 20px;
+}
+
+.sort-control p {
+    font-weight: 200;
+}
+
+.sort-control select {
+    background: transparent;
+    border: none;
+    text-transform: uppercase;
+    color: #FFF;
+    font-size: 16px;
+}
+
+.sort-control select:focus-visible {
+    outline: none;
+}
+
+.sort-control option {
+    background-color: #232323EA;
+}

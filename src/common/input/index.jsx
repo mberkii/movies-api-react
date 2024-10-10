@@ -1,7 +1,7 @@
 import './style.css'
 
-const Input = ({defaultValue}) => {
-    return <input defaultValue={defaultValue} className="input" />
+const Input = ({placeholderText}) => {
+    return <input placeholder={placeholderText} className="input" />
 }
 
 export default Input

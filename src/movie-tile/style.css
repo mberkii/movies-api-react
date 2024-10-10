@@ -1,0 +1,88 @@
+.movie-tile {
+    max-width: 320px;
+    width: 100%;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.movie-tile a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.movie-title {
+    margin: 12px 0 8px;
+}
+
+.movie-genres {
+    text-align: left;
+    font-weight: 100;
+}
+
+.movie-year {
+    padding: 4px 12px;
+    border: 1px solid #979797;
+    border-radius: 4px;
+}
+
+.movie-actions-toggle {
+    display: none;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 100%;
+    background-color: #2A202D;
+    cursor: pointer;
+}
+
+.movie-actions-toggle:after {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: radial-gradient(circle, #FFF 1.4px, transparent 2px);
+    background-size: 100% 33.33%;
+}
+
+.movie-tile:hover .movie-actions-toggle {
+    display: block;
+}
+
+.movie-actions {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    max-width: 190px;
+    width: 100%;
+    padding: 16px 0;
+    background-color: #232323EA;
+}
+
+.movie-actions a {
+    display: block;
+    color: #FFF;
+    padding: 12px 0;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.movie-actions a:hover {
+    background-color: #F65261;
+}
+
+.close-btn {
+    position: absolute;
+    top: 4px;
+    right: 8px;
+    background: transparent;
+    border: none;
+    color: #FFF;
+    cursor: pointer;
+}

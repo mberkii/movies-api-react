@@ -1,7 +1,6 @@
 .genre-container {
     width: 100%;
     max-width: 56%;
-    margin: 0 auto;
     display: flex;
     justify-content: space-between;
 }
@@ -20,5 +19,5 @@
     text-decoration: underline;
     text-decoration-color: #F65261;
     text-decoration-thickness: 4px;
-    text-underline-offset: 8px;
+    text-underline-offset: 12px;
 }
