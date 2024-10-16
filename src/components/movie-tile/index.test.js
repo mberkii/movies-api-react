@@ -7,7 +7,7 @@ const mockMovieDetails = {
     id: '000',
     name: 'Pulp Fiction',
     releaseDate: '1994-01-01',
-    image: './assets/pulp-fiction.png',
+    image: './../assets/pulp-fiction.png',
     genres: ['Action & Adventure'],
     duration: '2hrs',
     description: 'Lorem ipsum..............',

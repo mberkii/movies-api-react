@@ -1,15 +1,13 @@
-import Header from ".";
-import image from '../assets/bohemian-rhapsody.png'
+import MovieDetails from ".";
+import image from '../../assets/bohemian-rhapsody.png'
 
 export default {
-    component: Header
+    component: MovieDetails
 }
-
-export const ShowSearchBar = {}
 
 export const ShowMovieDetails = {
     args: {
-        movieDetails: {
+        details: {
             id: '001',
             name: 'Bohemian Rhapsody',
             releaseYear: '2018',

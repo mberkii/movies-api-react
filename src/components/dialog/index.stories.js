@@ -6,7 +6,7 @@ const mockMovieData = {
     id: '005',
     name: 'Reservoir Dogs',
     releaseDate: '1992-01-01',
-    image: require('../assets/reservoir-dogs.png'),
+    image: require('../../assets/reservoir-dogs.png'),
     genres: ['Oscar Winning Movie'],
     duration: '2hrs',
     description: 'Lorem ipsum..............',

@@ -1,5 +1,5 @@
 import MovieTile from ".";
-import image from '../assets/bohemian-rhapsody.png'
+import image from '../../assets/bohemian-rhapsody.png'
 
 export default {
     component: MovieTile

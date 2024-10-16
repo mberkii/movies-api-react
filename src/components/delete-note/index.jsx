@@ -1,9 +1,9 @@
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
-import { useMoviesContext } from '../contexts'
+import { useMoviesContext } from '../../contexts'
 
-import Button from '../common/button'
+import Button from '../../common/button'
 
 const DeleteNote = () => {
     const navigate = useNavigate()

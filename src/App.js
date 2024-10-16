@@ -5,13 +5,13 @@ import { Route, Routes, useNavigate } from 'react-router-dom'
 
 import { useMoviesContext } from './contexts'
 
-import Header from './header'
-import GenreSelect from './genre-select'
-import SortControl from './sort-control'
-import MovieTile from './movie-tile'
-import Dialog from './dialog'
-import MovieForm from './movie-form'
-import DeleteNote from './delete-note'
+import Header from './components/header'
+import GenreSelect from './components/genre-select'
+import SortControl from './components/sort-control'
+import MovieTile from './components/movie-tile'
+import Dialog from './components/dialog'
+import MovieForm from './components/movie-form'
+import DeleteNote from './components/delete-note'
 
 function App() {
 	const {genres, movies, updateMovie, addMovie} = useMoviesContext()

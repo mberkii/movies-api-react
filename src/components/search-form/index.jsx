@@ -1,7 +1,7 @@
 import './style.css'
 
-import Button from '../common/button'
-import Input from '../common/input'
+import Button from '../../common/button'
+import Input from '../../common/input'
 
 const SearchForm = ({placeholderText}) => {
 	const onSubmit = (event) => {

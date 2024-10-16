@@ -2,10 +2,10 @@ import './style.css'
 
 import React from 'react'
 
-import Input from '../common/input'
-import Button from '../common/button'
+import Input from '../../common/input'
+import Button from '../../common/button'
 
-import { useMoviesContext } from '../contexts'
+import { useMoviesContext } from '../../contexts'
 
 const MovieForm = ({details, onSubmit}) => {
     const {genres} = useMoviesContext()
