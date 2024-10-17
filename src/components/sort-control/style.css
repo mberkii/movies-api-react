@@ -1,0 +1,13 @@
+.sort-control {
+    text-transform: uppercase;
+    gap: 20px;
+}
+
+.sort-control p {
+    font-weight: 200;
+}
+
+.sort-control select {
+    background: transparent;
+    text-transform: uppercase;
+}

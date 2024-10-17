@@ -2,7 +2,6 @@
   max-width: 1200px;
   width: 100%;
   margin: 20px auto;
-  text-align: center;
 }
 
 .App-logo {
@@ -29,6 +28,12 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.movies-grid {
+  margin-left: -20px;
+  margin-right: -20px;
+  align-items: start;
 }
 
 @keyframes App-logo-spin {
