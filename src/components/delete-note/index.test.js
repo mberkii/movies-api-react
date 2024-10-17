@@ -6,7 +6,7 @@ jest.mock('react-router-dom', () => ({
     useParams: () => ({})
 }))
 
-jest.mock('../contexts', () => ({
+jest.mock('../../contexts', () => ({
     useMoviesContext: () => ({})
 }))
 

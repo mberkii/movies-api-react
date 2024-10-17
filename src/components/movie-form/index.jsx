@@ -1,15 +1,22 @@
 import './style.css'
 
 import React from 'react'
+import { useParams } from 'react-router-dom'
 
 import Input from '../../common/input'
 import Button from '../../common/button'
 
 import { useMoviesContext } from '../../contexts'
+import { formatRuntime } from '../../utils'
 
-const MovieForm = ({details, onSubmit}) => {
-    const {genres} = useMoviesContext()
+const MovieForm = ({onSubmit}) => {
+    const {id} = useParams()
+    const {genres, moviesData} = useMoviesContext()
+
+    const movies = moviesData?.data
+    const details = movies?.find((movie) => movie.id === Number(id))
     const defaultGenre = genres.find((genre) => details?.genres?.map((genre) => genre.toLowerCase()).includes(genre.name))
+    const runtime = details?.runtime && formatRuntime(details.runtime)
 
     const resetForm = (event) => {
         event.preventDefault()
@@ -24,14 +31,14 @@ const MovieForm = ({details, onSubmit}) => {
                         name="title"
                         type="text"
                         labelText="Title"
-                        attributes={{type: 'text', defaultValue: details?.name}}
+                        attributes={{type: 'text', defaultValue: details?.title}}
                     />
                 </div>
                 <div className="flex-1_3">
                     <Input
                         name="date"
                         labelText="Release date"
-                        attributes={{type: 'date', defaultValue: details?.releaseDate}}
+                        attributes={{type: 'date', defaultValue: details?.release_date}}
                     />
                 </div>
                 
@@ -41,14 +48,14 @@ const MovieForm = ({details, onSubmit}) => {
                     <Input
                         name="url"
                         labelText="Movie image url" 
-                        attributes={{type: 'text', defaultValue: details?.image}}
+                        attributes={{type: 'text', defaultValue: details?.poster_path}}
                     />
                 </div>
                 <div className="flex-1_3">
                     <Input
                         name="rating"
                         labelText='Rating'
-                        attributes={{type: 'text', defaultValue: details?.rating}}
+                        attributes={{type: 'text', defaultValue: details?.vote_average}}
                     />
                 </div>
             </div>
@@ -69,13 +76,13 @@ const MovieForm = ({details, onSubmit}) => {
                     <Input
                         name="time"
                         labelText="Runtime"
-                        attributes={{type: 'text', defaultValue: details?.duration}}
+                        attributes={{type: 'text', defaultValue: runtime}}
                     />
                 </div>
             </div>
             <div className="d-flex mb-3">
                 <label htmlFor="overview">Overview</label>
-                <textarea id="overview" name="overview" defaultValue={details?.description} />
+                <textarea id="overview" name="overview" defaultValue={details?.overview} />
             </div>
             <div className="btns-wrap">
                 <Button text="Reset" onClick={resetForm} inverseStyle={true} />

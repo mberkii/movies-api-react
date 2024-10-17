@@ -1,6 +1,10 @@
 .genre-container {
     width: 100%;
     max-width: 70%;
+    line-height: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .genre-link {
@@ -9,6 +13,7 @@
     line-height: 19.5px;
     text-align: left;
     text-transform: uppercase;
+    margin-right: 8px;
 }
 
 .genre-link.active {

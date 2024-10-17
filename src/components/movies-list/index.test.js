@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 
-import MovieDetails from '.'
+import MoviesList from "."
 
 const mockMovieDetails = {
     id: '000',
@@ -13,7 +13,19 @@ const mockMovieDetails = {
     vote_average: '9.0'
 }
 
-test('should render movie details component', () => {
-    render(<MovieDetails details={mockMovieDetails} />)
+jest.mock('react-router-dom', () => ({
+    Link: () => <></>
+}))
+
+jest.mock('../../contexts', () => ({
+    useMoviesContext: () => ({
+        genres: [{id: '000', name: 'action'}],
+        moviesData: {data: [mockMovieDetails]},
+        searchMovies: () => {}
+    })
+}))
+
+test('should render movies list', () => {
+    render(<MoviesList />)
     expect(screen.getByText(/pulp fiction/i)).toBeInTheDocument()
 })

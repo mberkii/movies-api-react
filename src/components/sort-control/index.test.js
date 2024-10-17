@@ -2,6 +2,10 @@ import { render, screen } from '@testing-library/react'
 
 import SortControl from "."
 
+jest.mock('../../contexts', () => ({
+    useMoviesContext: () => ({searchMovies: () => {}})
+}))
+
 test('should render sort control component', () => {
     render (<SortControl setSortedBy={() => {}}/>)
 

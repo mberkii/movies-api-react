@@ -1,6 +1,12 @@
 .movie-details {
     display: flex;
-    gap: 2rem
+    gap: 2rem;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.movie-details img {
+    width: 320px;
 }
 
 .movie-header {

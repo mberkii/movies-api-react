@@ -9,13 +9,13 @@ export const ShowMovieDetails = {
     args: {
         details: {
             id: '001',
-            name: 'Bohemian Rhapsody',
-            releaseYear: '2018',
-            image: image,
+            title: 'Bohemian Rhapsody',
+            release_date: '2018-01-01',
+            poster_path: image,
             genres: ['Drama', 'Biography', 'Music'],
-            duration: '2hrs',
-            description: 'Lorem ipsum..............',
-            rating: '9.0'
+            runtime: '200',
+            overview: 'Lorem ipsum..............',
+            vote_average: '9.0'
         }
     }
 }

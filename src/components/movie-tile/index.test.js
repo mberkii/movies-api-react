@@ -5,13 +5,13 @@ import MovieTile from ".";
 
 const mockMovieDetails = {
     id: '000',
-    name: 'Pulp Fiction',
-    releaseDate: '1994-01-01',
-    image: './../assets/pulp-fiction.png',
+    title: 'Pulp Fiction',
+    release_date: '1994-01-01',
+    poster_path: './../assets/pulp-fiction.png',
     genres: ['Action & Adventure'],
-    duration: '2hrs',
-    description: 'Lorem ipsum..............',
-    rating: '9.0'
+    runtime: '200',
+    overview: 'Lorem ipsum..............',
+    vote_average: '9.0'
 }
 
 jest.mock('react-router-dom', () => ({
