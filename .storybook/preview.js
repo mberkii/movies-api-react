@@ -3,7 +3,6 @@
 import "../src/index.css";
 
 import {MoviesProvider} from "../src/contexts";
-import {MemoryRouter} from 'react-router-dom';
 
 const preview = {
 	parameters: {
@@ -24,11 +23,9 @@ const preview = {
 	},
 	decorators: [
 		(Story) => (
-			<MemoryRouter>
-				<MoviesProvider>
-					<Story />
-				</MoviesProvider>
-			</MemoryRouter>
+			<MoviesProvider>
+				<Story />
+			</MoviesProvider>
 		)
 	]
 };

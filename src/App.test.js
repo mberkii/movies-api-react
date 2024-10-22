@@ -20,14 +20,13 @@ const mockMovies = [
 }]
 
 jest.mock('react-router-dom', () => ({
-  useNavigate: () => {},
-  Routes: () => <></>,
-  Route: () => <></>,
+  createBrowserRouter: () => {},
+  RouterProvider: () => <></>,
   Link: () => <></>
 }))
 
 jest.mock('./contexts', () => ({
-  useMoviesContext: () => ({genres: mockGenres, movies: mockMovies})
+  useMoviesContext: () => ({genres: mockGenres, movies: mockMovies, searchMovies: () => {}})
 }))
 
 test('renders learn react link', () => {
