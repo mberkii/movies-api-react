@@ -2,6 +2,10 @@ import { render, screen } from '@testing-library/react'
 
 import Header from '.'
 
+jest.mock('react-router-dom', () => ({
+    Link: () => <></>
+}))
+
 jest.mock('../search-form', () => () => <div data-testid="search-form" />)
 jest.mock('../movie-details', () => () => <div data-testid="movie-details" />)
 

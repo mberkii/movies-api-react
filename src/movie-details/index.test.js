@@ -5,7 +5,7 @@ import MovieDetails from '.'
 const mockMovieDetails = {
     id: '000',
     name: 'Pulp Fiction',
-    releaseYear: '1994',
+    releaseDate: '1994-01-01',
     image: './assets/pulp-fiction.png',
     genres: ['Action & Adventure'],
     duration: '2hrs',

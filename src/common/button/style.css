@@ -1,11 +1,18 @@
 .button {
+    min-width: 180px;
     background-color: #F65261;
     color: #FFFFFF;
     font-size: 20px;
     font-weight: 400;
     line-height: 24.38px;
     text-align: center;
-    border: none;
+    text-transform: uppercase;
+    border: 1px solid #F65261;
     border-radius: 4px;
     padding: 16px
+}
+
+.inverse {
+    background-color: transparent;
+    color: #F65261;
 }

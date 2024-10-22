@@ -5,7 +5,7 @@ const SortControl = ({setSortedBy}) => {
     const onChange = (event) => setSortedBy(event.target.value)
 
     return (
-        <div className='d-flex sort-control'>
+        <div className='d-flex space-between sort-control'>
             <p>Sort by</p>
             <select onChange={onChange}>
                 <option value="date">Release date</option>

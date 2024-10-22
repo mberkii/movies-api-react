@@ -1,0 +1,17 @@
+textarea {
+    width: 100%;
+    background: #323232F2;
+    border: none;
+    min-height: 200px;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    padding: 16px;
+}
+
+#genre {
+    background-color: #323232F2;
+    height: 56px;
+    padding: 16px;
+    border-radius: 4px;
+}

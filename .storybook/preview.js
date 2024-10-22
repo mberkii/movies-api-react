@@ -2,6 +2,9 @@
 
 import "../src/index.css";
 
+import {MoviesProvider} from "../src/contexts";
+import {MemoryRouter} from 'react-router-dom';
+
 const preview = {
 	parameters: {
 		controls: {
@@ -19,6 +22,15 @@ const preview = {
 			default: 'Greyish',
 		},
 	},
+	decorators: [
+		(Story) => (
+			<MemoryRouter>
+				<MoviesProvider>
+					<Story />
+				</MoviesProvider>
+			</MemoryRouter>
+		)
+	]
 };
 
 export default preview;
