@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react'
+import { createContext, useContext, useRef, useState, useCallback, useMemo } from 'react'
 
 import { getMoviesData } from '../utils'
 
@@ -20,12 +20,12 @@ const genres = [
 ]
 
 export const MoviesProvider = ({children}) => {
-    const [sortCriteria, setSortCriteria] = useState({sortBy: 'title', limit: 12})
     const [moviesData, setMoviesData] = useState({data: []})
     const [moviesList, setMoviesList] = useState(moviesData.data)
 
-    const pagination = useRef(false)
-    const handleMovieUpdate = (details) => {
+    const sortCriteria = useRef({})
+
+    const handleMovieUpdate = useCallback((details) => {
         const movieToUpdate = moviesList.find((movie) => movie.id === details.id)
 
         if (!movieToUpdate) {
@@ -33,37 +33,31 @@ export const MoviesProvider = ({children}) => {
         }
 
         Object.keys(movieToUpdate).forEach((prop) => (movieToUpdate[prop] = details[prop]))
-    }
+    }, [moviesList])
 
-    const handleMovieDelete = (id) => {
+    const handleMovieDelete = useCallback((id) => {
         const filteredMovies = moviesList.filter((movie) => movie.id !== id)
 
         setMoviesList(filteredMovies)
-    }
+    }, [moviesList])
+
+    const handleMovieSearch = useCallback(async(criteria, isPaginationFlow) => {
+        sortCriteria.current = {...sortCriteria.current, ...criteria}
+
+        const response = await getMoviesData(sortCriteria.current)
+        const data = isPaginationFlow && {data: [...moviesData.data, ...response.data]}
+        setMoviesData({...response, ...data})
+    }, [moviesData.data])
 
     const value = useMemo(
         () => ({
             genres,
             moviesData,
-            searchMovies: (criteria, isPaginationFlow) => {
-                pagination.current = isPaginationFlow
-
-                setSortCriteria({...sortCriteria, ...criteria})
-            },
+            searchMovies: (criteria, isPaginationFlow) => handleMovieSearch(criteria, isPaginationFlow),
             addMovie: (details) => setMoviesList([...moviesList, details]),
             updateMovie: handleMovieUpdate,
             deleteMovie: handleMovieDelete
-        }),
-        [moviesData]
-    )
-
-    useEffect(() => {
-        (async() => {
-            const response = await getMoviesData(sortCriteria)
-            const data = pagination.current && {data: [...moviesData.data, ...response.data]}
-            setMoviesData({...response, ...data})
-        })()
-    }, [sortCriteria])
+        }), [moviesData, moviesList, handleMovieDelete, handleMovieSearch, handleMovieUpdate])
 
     return (
         <MoviesContext.Provider value={value}>

@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import { Link } from 'react-router-dom'
 
 import './style.css'
 
@@ -25,8 +24,8 @@ const MovieTile = ({details, onClick}) => {
             <button className='movie-actions-toggle' onClick={onMovieActionsToggleClick}></button>
             {showMovieActions && (
                 <div className='movie-actions'>
-                    <Link to={`/${details.id}/edit`}>Edit</Link>
-                    <Link to={`/${details.id}/delete`}>Delete</Link>
+                    <a href={`/${details.id}/edit`}>Edit</a>
+                    <a href={`/${details.id}/delete`}>Delete</a>
                     <button className='close-btn' onClick={onMovieActionsToggleClick}>&#10006;</button>
                 </div>
             )}

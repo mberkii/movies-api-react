@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 import SearchForm from '../search-form'
 import MovieDetails from '../movie-details'
@@ -11,7 +10,7 @@ const Header = ({movieDetails}) => {
         <header className='header'>
             <p className='color-red mb-1'><b>netflix</b>roulette</p>
             <div className="btns-wrap">
-                <Link to="/add" className="add-btn">+ Add movie</Link>
+                <a href="/add" className="add-btn">+ Add movie</a>
             </div>
             {movieDetails
                 ? <MovieDetails details={movieDetails} />

@@ -6,6 +6,10 @@ jest.mock('react-dom', () => ({
     createPortal: () => <div data-testid="dialog" />
 }))
 
+jest.mock('react-router-dom', () => ({
+    useNavigate: () => {}
+}))
+
 test('should render dialog component', () => {
     render(<Dialog />)
     expect(screen.getByTestId('dialog')).toBeInTheDocument()

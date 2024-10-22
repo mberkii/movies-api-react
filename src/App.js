@@ -1,6 +1,6 @@
 import './App.css'
 
-import { Route, Routes, useNavigate } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import { useMoviesContext } from './contexts'
 
@@ -11,10 +11,6 @@ import MoviesList from './components/movies-list'
 
 function App() {
 	const {updateMovie, addMovie} = useMoviesContext()
-
-	const navigate = useNavigate()
-
-	const onClose = () => navigate('/')
 
 	const createMovieData = (event, movieId) => {
 		event.preventDefault()
@@ -37,33 +33,42 @@ function App() {
 		const dataToSend = createMovieData(event, movieId)
 
 		updateMovie(dataToSend)
-		onClose()
 	}
 
 	const onMovieAddSubmit = (event) => {
 		const dataToSend = createMovieData(event)
 
 		addMovie(dataToSend)
-		onClose()
 	}
+
+	const router = createBrowserRouter([
+		{
+			path: '/',
+			element: <></>
+		},
+		{
+			path: '/:id',
+			children: [
+				{
+					path: 'edit',
+					element: <Dialog title="Edit movie" content={<MovieForm title="Edit movie" onSubmit={onMovieEditSubmit}/>} />
+				},
+				{
+					path: 'delete',
+					element: <Dialog title="Delete movie" content={<DeleteNote />} />
+				}
+			]
+		},
+		{
+			path: '/add',
+			element: <Dialog title="Add movie" content={<MovieForm onSubmit={onMovieAddSubmit}/>} />
+		}
+	])
 
   	return (
 		<div className="App">
-			<Routes>
-				<Route
-					path='/add'
-					element={<Dialog title="Add movie" content={<MovieForm onSubmit={onMovieAddSubmit} />} onClose={onClose}/>}
-				/>
-				<Route
-					path='/:id/edit'
-					element={<Dialog title="Edit movie" content={<MovieForm onSubmit={onMovieEditSubmit} />} onClose={onClose} />} 
-				/>
-				<Route
-					path='/:id/delete'
-					element={<Dialog title="Delete movie" content={<DeleteNote />} onClose={onClose}/>}
-				/>
-			</Routes>
 			<MoviesList />
+			<RouterProvider router={router} />
 			<footer><p className='color-red text-center'><b>netflix</b>roulette</p></footer>
 		</div>
   	)

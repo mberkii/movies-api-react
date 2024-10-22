@@ -1,7 +1,7 @@
 import './style.css'
 
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
 import Input from '../../common/input'
 import Button from '../../common/button'
@@ -12,6 +12,8 @@ import { formatRuntime } from '../../utils'
 const MovieForm = ({onSubmit}) => {
     const {id} = useParams()
     const {genres, moviesData} = useMoviesContext()
+    
+	const navigate = useNavigate()
 
     const movies = moviesData?.data
     const details = movies?.find((movie) => movie.id === Number(id))
@@ -23,8 +25,13 @@ const MovieForm = ({onSubmit}) => {
         event.currentTarget.parentElement.parentElement.reset()
     }
 
+    const handleSubmit = (event) => {
+        onSubmit(event, details?.id)
+        navigate('/')
+    }
+
     return (
-        <form onSubmit={(event) => onSubmit(event, details?.id)}>
+        <form onSubmit={handleSubmit}>
             <div className="d-flex space-between gap-4 mb-1">
                 <div className="flex-2">
                     <Input

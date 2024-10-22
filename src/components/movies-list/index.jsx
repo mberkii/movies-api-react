@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react'
+import React, {useState, useRef, useEffect} from 'react'
 
 import { useMoviesContext } from '../../contexts'
 
@@ -43,6 +43,10 @@ const MoviesList = () => {
 			offset: moreRef.current
 		}, true)
 	}
+
+	useEffect(() => {
+		searchMovies({sortBy: 'title', limit: 12})
+	}, [searchMovies])
 
     return (
         <>

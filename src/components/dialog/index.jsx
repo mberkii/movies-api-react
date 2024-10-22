@@ -1,10 +1,14 @@
 import React from 'react'
 import { createPortal } from 'react-dom'
+import { useNavigate } from 'react-router-dom'
 import FocusTrap from 'focus-trap-react'
 
 import './style.css'
 
-const Dialog = ({title, content, onClose}) => {
+const Dialog = ({title, content}) => {
+	const navigate = useNavigate()
+	const onClose = () => navigate('/')
+
     return (
         <>
             {createPortal(

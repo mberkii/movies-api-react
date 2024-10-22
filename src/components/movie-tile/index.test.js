@@ -30,12 +30,13 @@ test('should show/hide movie actions menu', () => {
 
     userEvent.click(menuShowButton)
 
-    expect(screen.getAllByTestId('link')[0]).toBeInTheDocument()
-    expect(screen.getAllByTestId('link')[1]).toBeInTheDocument()
+    expect(screen.getByText(/edit/i)).toBeInTheDocument()
+    expect(screen.getByText(/delete/i)).toBeInTheDocument()
 
     const menuCloseButton = screen.getAllByRole('button')[1]
 
     userEvent.click(menuCloseButton)
     
-    expect(screen.queryByTestId('link')).not.toBeInTheDocument()
+    expect(screen.queryByText(/edit/i)).not.toBeInTheDocument()
+    expect(screen.queryByText(/delete/i)).not.toBeInTheDocument()
 })

@@ -18,6 +18,11 @@ const mockMovieDetails = {
     vote_average: '9.0'
 }
 
+jest.mock('react-router-dom', () => ({
+    useNavigate: () => {},
+    useParams: () => ({id: '000'})
+}))
+
 jest.mock('../../contexts', () => ({
     useMoviesContext: () => ({
         genres: mockGenres,
