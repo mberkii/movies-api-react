@@ -13,7 +13,15 @@ const mockMovieDetails = {
     vote_average: '9.0'
 }
 
+jest.mock('react-router-dom', () => ({
+    useParams: () => ({id: '000'})
+}))
+
+jest.mock('../../contexts', () => ({
+    useMoviesContext: () => ({moviesData: {data: [mockMovieDetails]}})
+}))
+
 test('should render movie details component', () => {
-    render(<MovieDetails details={mockMovieDetails} />)
+    render(<MovieDetails />)
     expect(screen.getByText(/pulp fiction/i)).toBeInTheDocument()
 })

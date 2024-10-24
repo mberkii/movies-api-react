@@ -15,7 +15,8 @@ const mockMovieDetails = {
 }
 
 jest.mock('react-router-dom', () => ({
-    Link: () => <div data-testid="link" />
+    Link: () => <div data-testid="link" />,
+    useParams: () => jest.fn().mockReturnValueOnce({})
 }))
 
 test('should render movie tile component', () => {

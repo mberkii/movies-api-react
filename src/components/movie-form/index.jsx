@@ -9,9 +9,22 @@ import Button from '../../common/button'
 import { useMoviesContext } from '../../contexts'
 import { formatRuntime } from '../../utils'
 
-const MovieForm = ({onSubmit}) => {
+const createMovieData = (form, movieId) => {
+    return {
+        id: movieId || window.crypto.randomUUID(),
+        name: form.title.value,
+        releaseDate: form.date.value,
+        image: form.url.value,
+        genres: [form.genre.value],
+        duration: form.time.value,
+        description: form.overview.value,
+        rating: form.rating.value
+    }
+}
+
+const MovieForm = () => {
     const {id} = useParams()
-    const {genres, moviesData} = useMoviesContext()
+    const {genres, moviesData, updateMovie, addMovie} = useMoviesContext()
     
 	const navigate = useNavigate()
 
@@ -26,7 +39,12 @@ const MovieForm = ({onSubmit}) => {
     }
 
     const handleSubmit = (event) => {
-        onSubmit(event, details?.id)
+        event.preventDefault()
+    
+        const form = event.currentTarget
+		const dataToSend = createMovieData(form, details?.id)
+
+        details?.id ? updateMovie(dataToSend) : addMovie(dataToSend)
         navigate('/')
     }
 

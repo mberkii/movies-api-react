@@ -2,6 +2,10 @@ import { render, screen } from '@testing-library/react'
 
 import SearchForm from '.'
 
+jest.mock('react-router-dom', () => ({
+    useSearchParams: () => [{get: () => {}}, () => {}]
+}))
+
 jest.mock('../../contexts', () => ({
     useMoviesContext: () => ({
         searchMovies: () => {}
