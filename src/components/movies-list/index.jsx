@@ -28,7 +28,7 @@ const MoviesList = () => {
 	}
 
 	useEffect(() => {
-		if (loadData) {
+		const handleMoviesSearch = () => {
 			const sortedBy = {
 				sortBy: searchParams.get('sortBy'),
 				searchBy: searchParams.get('searchBy'),
@@ -38,13 +38,14 @@ const MoviesList = () => {
 			}
 
 			searchMovies(sortedBy)
-		}
 
-		if (location.pathname === '/' && !searchParams.size){
-			setSearchParams({sortBy: 'title', limit: 12})
+			if (location.pathname === '/' && !searchParams.size){
+				setSearchParams({sortBy: 'title', limit: 12})
+			}
 		}
 	
-    	return () => setLoadData(false)
+		window.addEventListener('load', handleMoviesSearch);
+    	return () => window.removeEventListener('load', handleMoviesSearch)
 	}, [searchMovies, searchParams, loadData, location.pathname, setSearchParams])
 
     return (
