@@ -16,6 +16,7 @@ const MovieTile = ({details}) => {
             <Link
                 to={`/${details.id}?searchBy=genres&genre=${searchParams.get('genre')}&sortBy=${searchParams.get('sortBy')}`}
                 state={{previousLocation: location}}
+                onClick={() => window.scrollTo(0, 0)}
             >
                 <img src={details.poster_path} alt={details.title} />
                 <div className='d-flex space-between movie-title'>

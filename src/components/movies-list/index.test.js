@@ -14,7 +14,8 @@ const mockMovieDetails = {
 }
 
 jest.mock('react-router-dom', () => ({
-    Link: () => <></>,
+    Link: (props) => <div>{props.children}</div>,
+    Outlet: () => <></>,
     useSearchParams: () => [{get: () => {}}, () => {}],
     useLocation: () => ({state: {previousLocation: {}}}),
     useParams: () => jest.fn().mockReturnValueOnce({})

@@ -4,6 +4,7 @@ import Header from '.'
 
 jest.mock('react-router-dom', () => ({
     Link: () => <></>,
+    Outlet: () => <div data-testid="movie-details" />,
     useParams: () => jest.fn().mockReturnValueOnce({}).mockReturnValue({id: '001'}),
     useLocation: () => ({})
 }))

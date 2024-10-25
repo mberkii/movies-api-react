@@ -16,6 +16,7 @@ const SearchForm = ({placeholderText}) => {
         const params = {
             query: event.currentTarget.search.value,
             searchBy: 'title',
+            sortBy: 'title',
             offset: 0
         }
 

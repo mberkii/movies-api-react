@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
 import MovieTile from ".";
+import { useSearchParams } from 'react-router-dom';
 
 const mockMovieDetails = {
     id: '000',
@@ -15,8 +16,10 @@ const mockMovieDetails = {
 }
 
 jest.mock('react-router-dom', () => ({
-    Link: () => <div data-testid="link" />,
-    useParams: () => jest.fn().mockReturnValueOnce({})
+    Link: (props) => <div data-testid="link">{props.children}</div>,
+    useParams: () => jest.fn().mockReturnValueOnce({}),
+    useSearchParams: () => [{get: () => {}}, () => {}],
+    useLocation: () => ({state: {previousLocation: {}}})
 }))
 
 test('should render movie tile component', () => {
@@ -30,14 +33,10 @@ test('should show/hide movie actions menu', () => {
     const menuShowButton = screen.getByRole('button')
 
     userEvent.click(menuShowButton)
-
-    expect(screen.getByText(/edit/i)).toBeInTheDocument()
-    expect(screen.getByText(/delete/i)).toBeInTheDocument()
+    expect(screen.getAllByTestId(/link/i)[1]).toBeInTheDocument()
 
     const menuCloseButton = screen.getAllByRole('button')[1]
 
-    userEvent.click(menuCloseButton)
-    
-    expect(screen.queryByText(/edit/i)).not.toBeInTheDocument()
-    expect(screen.queryByText(/delete/i)).not.toBeInTheDocument()
+    userEvent.click(menuCloseButton)    
+    expect(screen.getAllByTestId(/link/i)[1]).toBeUndefined()
 })
