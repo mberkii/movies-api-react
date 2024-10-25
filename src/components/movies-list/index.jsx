@@ -45,7 +45,7 @@ const MoviesList = () => {
 		}
 	
     	return () => setLoadData(false)
-	}, [searchMovies, searchParams, loadData])
+	}, [searchMovies, searchParams, loadData, location.pathname, setSearchParams])
 
     return (
         <>
