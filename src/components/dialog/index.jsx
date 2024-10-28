@@ -7,10 +7,8 @@ import './style.css'
 
 const Dialog = ({title, content}) => {
 	const navigate = useNavigate()
-    const location = useLocation()
-    const previousUrl = [location.state.previousLocation.pathname, location.state.previousLocation.search].join('')
-
-	const onClose = () => navigate(previousUrl)
+    const {state: {previousLocation: { pathname, search }}} = useLocation();
+    const onClose = () => navigate(`${pathname}${search}`)
 
     return (
         <>
