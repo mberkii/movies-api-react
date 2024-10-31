@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Outlet } from 'react-router-dom'
 
 import './style.css'
 import { formatRuntime } from '../../utils'
@@ -34,6 +34,7 @@ const MovieDetails = () => {
                     </div>
                 )
             }
+            <Outlet />
         </>
     )
 }

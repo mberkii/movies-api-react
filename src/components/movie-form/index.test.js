@@ -20,6 +20,7 @@ const mockMovieDetails = {
 
 jest.mock('react-router-dom', () => ({
     useNavigate: () => {},
+    useLocation: () => ({state: {previousLocation: {}}}),
     useParams: () => ({id: '000'})
 }))
 

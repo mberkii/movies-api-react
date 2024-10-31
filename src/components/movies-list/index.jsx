@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react'
+import React, {useRef, useEffect} from 'react'
 import { useSearchParams, useLocation } from 'react-router-dom'
 
 import { useMoviesContext } from '../../contexts'
@@ -11,7 +11,6 @@ import MovieTile from '../movie-tile'
 const MoviesList = () => {
 	const {moviesData, genres, searchMovies} = useMoviesContext()
 	const [searchParams, setSearchParams] = useSearchParams()
-	const [loadData, setLoadData] = useState(true)
 
 	const location = useLocation()
 	const moreRef = useRef(0)
@@ -46,7 +45,7 @@ const MoviesList = () => {
 	
 		window.addEventListener('load', handleMoviesSearch);
     	return () => window.removeEventListener('load', handleMoviesSearch)
-	}, [searchMovies, searchParams, loadData, location.pathname, setSearchParams])
+	}, [searchMovies, searchParams, location.pathname, setSearchParams])
 
     return (
         <>

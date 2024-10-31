@@ -21,18 +21,20 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: '/:id',
-				element: <MovieDetails />
+				element: <MovieDetails />,
+				children: [
+					{
+						path: 'edit',
+						element: <Dialog title="Edit movie" content={<MovieForm />} />
+					},
+					{
+						path: 'delete',
+						element: <Dialog title="Delete movie" content={<DeleteNote />} />
+					}
+				]
 			},
 			{
-				path: '/:id/edit',
-				element: <Dialog title="Edit movie" content={<MovieForm />} />
-			},
-			{
-				path: '/:id/delete',
-				element: <Dialog title="Delete movie" content={<DeleteNote />} />
-			},
-			{
-				path: '/add',
+				path: '/new',
 				element: <Dialog title="Add movie" content={<MovieForm />} />
 			}
 		]

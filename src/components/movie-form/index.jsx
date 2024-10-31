@@ -1,69 +1,60 @@
 import './style.css'
 
 import React from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, useLocation } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
 
 import Input from '../../common/input'
 import Button from '../../common/button'
 
 import { useMoviesContext } from '../../contexts'
-import { formatRuntime } from '../../utils'
-
-const createMovieData = (form, movieId) => {
-    return {
-        id: movieId || window.crypto.randomUUID(),
-        name: form.title.value,
-        releaseDate: form.date.value,
-        image: form.url.value,
-        genres: [form.genre.value],
-        duration: form.time.value,
-        description: form.overview.value,
-        rating: form.rating.value
-    }
-}
+import { addMovie, updateMovie } from '../../utils'
 
 const MovieForm = () => {
     const {id} = useParams()
-    const {genres, moviesData, updateMovie, addMovie} = useMoviesContext()
-    
-	const navigate = useNavigate()
+    const {genres, moviesData} = useMoviesContext()
 
+    const location = useLocation()
+	const navigate = useNavigate()
+    const previousUrl = [location.state?.previousLocation?.pathname, location.state?.previousLocation?.search].join('')
+    const validationRules = { required: true }
+    
     const movies = moviesData?.data
     const details = movies?.find((movie) => movie.id === Number(id))
-    const defaultGenre = genres.find((genre) => details?.genres?.map((genre) => genre.toLowerCase()).includes(genre.name))
-    const runtime = details?.runtime && formatRuntime(details.runtime)
 
-    const resetForm = (event) => {
-        event.preventDefault()
-        event.currentTarget.parentElement.parentElement.reset()
-    }
+    const {register, handleSubmit, reset} = useForm({
+        defaultValues: {
+            title: details?.title,
+            release_date: details?.release_date,
+            poster_path: details?.poster_path,
+            vote_average: details?.vote_average,
+            genres: details?.genres,
+            runtime: details?.runtime,
+            overview: details?.overview
+        }
+    })
 
-    const handleSubmit = (event) => {
-        event.preventDefault()
-    
-        const form = event.currentTarget
-		const dataToSend = createMovieData(form, details?.id)
+    const onSubmit = async (values) => {
+        values.release_date = values.release_date.toISOString().split('T')[0]
 
-        details?.id ? updateMovie(dataToSend) : addMovie(dataToSend)
-        navigate('/')
+        details?.id ? await updateMovie({id: details.id, ...values}) : await addMovie(values)
+        navigate(previousUrl)
+        navigate(0)
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
             <div className="d-flex space-between gap-4 mb-1">
                 <div className="flex-2">
                     <Input
-                        name="title"
-                        type="text"
                         labelText="Title"
-                        attributes={{type: 'text', defaultValue: details?.title}}
+                        attributes={register('title', validationRules)}
                     />
                 </div>
                 <div className="flex-1_3">
                     <Input
-                        name="date"
                         labelText="Release date"
-                        attributes={{type: 'date', defaultValue: details?.release_date}}
+                        attributes={{type: 'date', ...register('release_date', {valueAsDate: true, ...validationRules})}}
                     />
                 </div>
                 
@@ -71,23 +62,21 @@ const MovieForm = () => {
             <div className="d-flex space-between gap-4 mb-1">
                 <div className="flex-2">
                     <Input
-                        name="url"
-                        labelText="Movie image url" 
-                        attributes={{type: 'text', defaultValue: details?.poster_path}}
+                        labelText="Movie image url"
+                        attributes={register('poster_path', validationRules)}
                     />
                 </div>
                 <div className="flex-1_3">
                     <Input
-                        name="rating"
                         labelText='Rating'
-                        attributes={{type: 'text', defaultValue: details?.vote_average}}
+                        attributes={{type: 'number', step: '0.1', ...register('vote_average', {valueAsNumber: true, ...validationRules})}}
                     />
                 </div>
             </div>
             <div className="d-flex space-between gap-4 mb-1">
                 <div className="flex-2">
                     <label htmlFor="genre">Genre</label>
-                    <select id="genre" name="genre" className="w-100" defaultValue={defaultGenre?.name}>
+                    <select id="genre" className="w-100" multiple {...register('genres', validationRules)}>
                         {genres.map((genre) =>
                             <option
                                 key={genre.id}
@@ -99,18 +88,17 @@ const MovieForm = () => {
                 </div>
                 <div className="flex-1_3">
                     <Input
-                        name="time"
                         labelText="Runtime"
-                        attributes={{type: 'text', defaultValue: runtime}}
+                        attributes={{type: 'number', ...register('runtime', {valueAsNumber: true, ...validationRules})}}
                     />
                 </div>
             </div>
             <div className="d-flex mb-3">
                 <label htmlFor="overview">Overview</label>
-                <textarea id="overview" name="overview" defaultValue={details?.overview} />
+                <textarea id="overview" {...register('overview', validationRules)} />
             </div>
             <div className="btns-wrap">
-                <Button text="Reset" onClick={resetForm} inverseStyle={true} />
+                <Button text="Reset" onClick={() => reset()} inverseStyle={true} />
                 <Button text="Submit" />
             </div>
         </form>
