@@ -33,7 +33,7 @@ export const getMoviesData = async (criteria) => {
     }
 
     const searchQueries = Object.entries(criteria)
-        .filter((param) => param[1])
+        .filter((param) => param[1] && param[1] !== 'all')
         .map((param) => ['query', 'genre'].includes(param[0]) ? ['search', param[1]].join('=') : param.join('='))
         .join('&')
 
