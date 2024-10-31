@@ -7,7 +7,9 @@ jest.mock('react-dom', () => ({
 }))
 
 jest.mock('react-router-dom', () => ({
-    useNavigate: () => {}
+    useNavigate: () => {},
+    useLocation: () => ({state: {previousLocation: {}}}),
+    useParams: () => jest.fn().mockReturnValueOnce({})
 }))
 
 test('should render dialog component', () => {

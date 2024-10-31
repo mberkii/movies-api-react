@@ -9,10 +9,11 @@ const mockGenres = [
     {id: '001', name: 'comedy'}
 ]
 
-const mockOnClick = (event) => {
-    event.preventDefault()
-    event.target.classList.add('active')
-}
+jest.mock('react-router-dom', () => ({
+    useSearchParams: () => [
+        {get: () => 'comedy'},
+        () => {}]
+}))
 
 test('should render all genres', () => {
     render(<GenreSelect genres={mockGenres} />)
@@ -21,15 +22,6 @@ test('should render all genres', () => {
 })
 
 test('should highlight selected genre', () => {
-    render(<GenreSelect genres={mockGenres} selected="comedy" />)
+    render(<GenreSelect genres={mockGenres} />)
     expect(screen.getByText(/comedy/i).classList.contains('active')).toBe(true)
-})
-
-test('should change selected genre on click', async () => {
-    render(<GenreSelect genres={mockGenres} selected='comedy' onClick={mockOnClick} />)
-
-    const horrorGenre = screen.getByText(/horror/i)
-
-    await act(async() => userEvent.click(horrorGenre))
-    expect(horrorGenre.classList.contains('active')).toBe(true)
 })

@@ -20,16 +20,18 @@ const mockMovies = [
 }]
 
 jest.mock('react-router-dom', () => ({
-  createBrowserRouter: () => {},
-  RouterProvider: () => <></>,
-  Link: () => <></>
+  Link: () => <></>,
+  Outlet: () => <></>,
+  useParams: () => jest.fn().mockReturnValueOnce({}),
+  useLocation: () => ({state: {previousLocation: {}}}),
+  useSearchParams: () => [{get: () => {}}, () => {}]
 }))
 
 jest.mock('./contexts', () => ({
   useMoviesContext: () => ({genres: mockGenres, movies: mockMovies, searchMovies: () => {}})
 }))
 
-test('renders learn react link', () => {
+test('renders app', () => {
   render(<App />);
   const logo = screen.getAllByText(/netflix/i)[0];
   expect(logo).toBeInTheDocument();

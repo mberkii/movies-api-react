@@ -1,4 +1,4 @@
-import { createContext, useContext, useRef, useState, useCallback, useMemo } from 'react'
+import { createContext, useContext, useState, useCallback, useMemo } from 'react'
 
 import { getMoviesData } from '../utils'
 
@@ -23,8 +23,6 @@ export const MoviesProvider = ({children}) => {
     const [moviesData, setMoviesData] = useState({data: []})
     const [moviesList, setMoviesList] = useState(moviesData.data)
 
-    const sortCriteria = useRef({})
-
     const handleMovieUpdate = useCallback((details) => {
         const movieToUpdate = moviesList.find((movie) => movie.id === details.id)
 
@@ -42,9 +40,7 @@ export const MoviesProvider = ({children}) => {
     }, [moviesList])
 
     const handleMovieSearch = useCallback(async(criteria, isPaginationFlow) => {
-        sortCriteria.current = {...sortCriteria.current, ...criteria}
-
-        const response = await getMoviesData(sortCriteria.current)
+        const response = await getMoviesData(criteria)
         const data = isPaginationFlow && {data: [...moviesData.data, ...response.data]}
         setMoviesData({...response, ...data})
     }, [moviesData.data])

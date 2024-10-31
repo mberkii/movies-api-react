@@ -1,13 +1,14 @@
 import React from 'react'
 import { createPortal } from 'react-dom'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import FocusTrap from 'focus-trap-react'
 
 import './style.css'
 
 const Dialog = ({title, content}) => {
 	const navigate = useNavigate()
-	const onClose = () => navigate('/')
+    const {state: {previousLocation: { pathname, search }}} = useLocation();
+    const onClose = () => navigate(`${pathname}${search}`)
 
     return (
         <>

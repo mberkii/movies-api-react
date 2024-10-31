@@ -1,22 +1,28 @@
 import './style.css'
 
+import { useSearchParams } from 'react-router-dom'
+
 import Button from '../../common/button'
 import Input from '../../common/input'
 import { useMoviesContext } from '../../contexts'
 
 const SearchForm = ({placeholderText}) => {
+    const [, setSearchParams] = useSearchParams()
     const {searchMovies} = useMoviesContext()
+
 	const onSubmit = (event) => {
 		event.preventDefault()
 
-        const searchQuery = event.currentTarget.search.value
+        const params = {
+            query: event.currentTarget.search.value,
+            searchBy: 'title',
+            sortBy: 'title',
+            offset: 0
+        }
 
         event.currentTarget.reset()
-        searchMovies({
-            search: searchQuery,
-            searchBy: 'title',
-            offset: 0
-        })
+        searchMovies(params)
+        setSearchParams(params)
 	}
 
     return (
