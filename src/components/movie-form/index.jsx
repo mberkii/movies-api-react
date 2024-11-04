@@ -27,7 +27,6 @@ const MovieForm = () => {
     })
 
     const onSubmit = async (values) => {
-        console.log(values)
         values.release_date = values.release_date.toISOString().split('T')[0]
 
         if (details?.id) {
