@@ -16,28 +16,25 @@ const MovieForm = () => {
 
     const location = useLocation()
 	const navigate = useNavigate()
-    const previousUrl = [location.state?.previousLocation?.pathname, location.state?.previousLocation?.search].join('')
+    const previousUrl = `${location.state?.previousLocation?.pathname}${location.state?.previousLocation?.search}`
     const validationRules = { required: true }
     
     const movies = moviesData?.data
     const details = movies?.find((movie) => movie.id === Number(id))
 
     const {register, handleSubmit, reset} = useForm({
-        defaultValues: {
-            title: details?.title,
-            release_date: details?.release_date,
-            poster_path: details?.poster_path,
-            vote_average: details?.vote_average,
-            genres: details?.genres,
-            runtime: details?.runtime,
-            overview: details?.overview
-        }
+        defaultValues: details || {}
     })
 
     const onSubmit = async (values) => {
         values.release_date = values.release_date.toISOString().split('T')[0]
 
-        details?.id ? await updateMovie({id: details.id, ...values}) : await addMovie(values)
+        if (details?.id) {
+            await updateMovie({id: details.id, ...values})
+        } else {
+            await addMovie(values)
+        }
+
         navigate(previousUrl)
         navigate(0)
     }
