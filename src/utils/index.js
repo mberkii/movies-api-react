@@ -7,24 +7,32 @@ export const formatRuntime = (runtime) => {
 }
 
 const makeApiCall = async (url, method, data) => {
-    const response = await fetch(
-        url,
-        {
-            method: method,
-            ...(data && {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(data)
-            })
+    try {
+        const response = await fetch(
+            url,
+            {
+                method: method,
+                ...(data && {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data)
+                })
+            }
+        )
+    
+        if (!response.ok) {
+            throw new Error(response.statusText)
         }
-    )
 
-    if (response.status === 204) {
-        return
+        if (response.status === 204) {
+            return
+        }
+
+        return await response.json()
+    } catch (error) {
+        console.error(error.message || error)
     }
-
-    return await response.json()
 }
 
 export const getMoviesData = async (criteria) => {

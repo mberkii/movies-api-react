@@ -1,4 +1,6 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+
 import MovieForm from '.'
 
 const mockGenres = [
@@ -18,10 +20,19 @@ const mockMovieDetails = {
     vote_average: '9.0'
 }
 
+const mockHandleSubmit = jest.fn()
+
 jest.mock('react-router-dom', () => ({
     useNavigate: () => {},
     useLocation: () => ({state: {previousLocation: {}}}),
     useParams: () => ({id: '000'})
+}))
+
+jest.mock('react-hook-form', () => ({
+    useForm: () => ({
+        register: () => ({}),
+        handleSubmit: () => mockHandleSubmit
+    })
 }))
 
 jest.mock('../../contexts', () => ({
@@ -38,7 +49,14 @@ test('should render movie form', () => {
     expect(screen.getByText(/release date/i)).toBeInTheDocument()
     expect(screen.getByText(/image url/i)).toBeInTheDocument()
     expect(screen.getByText(/overview/i)).toBeInTheDocument()
-    expect(screen.getByText(/genre/i)).toBeInTheDocument()
+    expect(screen.getByText(/select genre/i)).toBeInTheDocument()
     expect(screen.getByText(/rating/i)).toBeInTheDocument()
     expect(screen.getByText(/runtime/i)).toBeInTheDocument()
+})
+
+test('should submit form', async () => {
+    render(<MovieForm />)
+
+    await fireEvent.submit(screen.getByText(/submit/i))
+    expect(mockHandleSubmit).toHaveBeenCalled()
 })

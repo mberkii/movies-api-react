@@ -27,6 +27,7 @@ const MovieForm = () => {
     })
 
     const onSubmit = async (values) => {
+        console.log(values)
         values.release_date = values.release_date.toISOString().split('T')[0]
 
         if (details?.id) {
@@ -74,6 +75,7 @@ const MovieForm = () => {
                 <div className="flex-2">
                     <label htmlFor="genre">Genre</label>
                     <select id="genre" className="w-100" multiple {...register('genres', validationRules)}>
+                        <option value="" readOnly>Select Genre</option>
                         {genres.map((genre) =>
                             <option
                                 key={genre.id}

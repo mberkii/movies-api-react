@@ -20,7 +20,7 @@ const SortControl = () => {
     }
 
     return (
-        <div className='d-flex space-between sort-control'>
+        <div className='d-flex align-center space-between sort-control'>
             <p>Sort by</p>
             <select onChange={onChange} defaultValue={defaultValue}>
                 <option value="title">Title</option>

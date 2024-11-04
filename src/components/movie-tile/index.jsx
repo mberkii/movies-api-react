@@ -19,7 +19,7 @@ const MovieTile = ({details}) => {
                 onClick={() => window.scrollTo(0, 0)}
             >
                 <img src={details.poster_path} alt={details.title} />
-                <div className='d-flex space-between movie-title'>
+                <div className='d-flex align-center space-between movie-title'>
                     <h3>{details.title}</h3>
                     <span className='movie-year'>{releaseYear}</span>
                 </div>

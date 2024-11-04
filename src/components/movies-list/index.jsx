@@ -51,12 +51,12 @@ const MoviesList = () => {
         <>
 			<Header />
 			<div className='main'>
-				<div className='d-flex space-between mb-2 nav'>
+				<div className='d-flex align-center space-between mb-2 nav'>
 					<GenreSelect genres={genres} />
 					<SortControl />
 				</div>
 				<p className="text-left mb-2"><b>{moviesData?.totalAmount}</b> movies found</p>
-				<div className="d-flex movies-grid">
+				<div className="d-flex align-center movies-grid">
 					{movies?.map((movie) =>
 						<MovieTile key={movie.id} details={movie} />
 					)}
