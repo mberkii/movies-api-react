@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react'
 import MovieDetails from '.'
 
 const mockMovieDetails = {
-    id: '000',
+    id: 123,
     title: 'Pulp Fiction',
     release_date: '1994-01-01',
     poster_path: './../assets/pulp-fiction.png',
@@ -14,7 +14,8 @@ const mockMovieDetails = {
 }
 
 jest.mock('react-router-dom', () => ({
-    useParams: () => ({id: '000'})
+    useParams: () => ({id: '123'}),
+    Outlet: () => <></>
 }))
 
 jest.mock('../../contexts', () => ({

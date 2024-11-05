@@ -5,18 +5,18 @@ import { getMoviesData } from '../utils'
 const MoviesContext = createContext()
 
 const genres = [
-	{id: '000', name: 'action'},
-	{id: '001', name: 'adventure'},
-	{id: '002', name: 'animation'},
-	{id: '003', name: 'biography'},
-	{id: '004', name: 'comedy'},
-	{id: '005', name: 'crime'},
-	{id: '006', name: 'drama'},
-	{id: '007', name: 'family'},
-	{id: '008', name: 'fantasy'},
-	{id: '009', name: 'music'},
-	{id: '010', name: 'romance'},
-	{id: '011', name: 'science fiction'}
+	{id: '000', name: 'Action'},
+	{id: '001', name: 'Adventure'},
+	{id: '002', name: 'Animation'},
+	{id: '003', name: 'Biography'},
+	{id: '004', name: 'Comedy'},
+	{id: '005', name: 'Crime'},
+	{id: '006', name: 'Drama'},
+	{id: '007', name: 'Family'},
+	{id: '008', name: 'Fantasy'},
+	{id: '009', name: 'Music'},
+	{id: '010', name: 'Romance'},
+	{id: '011', name: 'Science Fiction'}
 ]
 
 export const MoviesProvider = ({children}) => {

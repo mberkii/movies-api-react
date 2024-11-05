@@ -69,8 +69,11 @@ a {
 
 .d-flex {
   display: flex;
-  align-items: center;
   flex-wrap: wrap;
+}
+
+.align-center {
+  align-items: center;
 }
 
 .space-between {

@@ -3,6 +3,7 @@ import DeleteNote from '.'
 
 jest.mock('react-router-dom', () => ({
     useNavigate: () => {},
+    useLocation: () => ({state: {previousLocation: {}}}),
     useParams: () => ({})
 }))
 

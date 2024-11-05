@@ -1,18 +1,19 @@
 import React from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useLocation } from 'react-router-dom'
 
-import { useMoviesContext } from '../../contexts'
+import { deleteMovie } from '../../utils'
 
 import Button from '../../common/button'
 
 const DeleteNote = () => {
     const navigate = useNavigate()
     const {id} = useParams()
-    const {deleteMovie} = useMoviesContext()
+    const {state: {previousLocation: { pathname, search }}} = useLocation()
 
-    const handleClick = () => {
-        deleteMovie(id)
-        navigate('/')
+    const handleClick = async () => {
+        await deleteMovie(id)
+        navigate(`${pathname}${search}`)
+        navigate(0)
     }
 
     return (

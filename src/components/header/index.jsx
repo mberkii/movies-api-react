@@ -13,7 +13,7 @@ const Header = () => {
         <header className='header'>
             <p className='color-red mb-1'><b>netflix</b>roulette</p>
             <div className="btns-wrap">
-                <Link to="/add" className="add-btn" state={{previousLocation: location}}>+ Add movie</Link>
+                <Link to="/new" className="add-btn" state={{previousLocation: location}}>+ Add movie</Link>
             </div>
             {!id && (
                 <div className='movie-search'>

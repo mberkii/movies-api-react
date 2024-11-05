@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react'
+import React, {useRef, useEffect} from 'react'
 import { useSearchParams, useLocation } from 'react-router-dom'
 
 import { useMoviesContext } from '../../contexts'
@@ -11,7 +11,6 @@ import MovieTile from '../movie-tile'
 const MoviesList = () => {
 	const {moviesData, genres, searchMovies} = useMoviesContext()
 	const [searchParams, setSearchParams] = useSearchParams()
-	const [loadData, setLoadData] = useState(true)
 
 	const location = useLocation()
 	const moreRef = useRef(0)
@@ -46,18 +45,18 @@ const MoviesList = () => {
 	
 		window.addEventListener('load', handleMoviesSearch);
     	return () => window.removeEventListener('load', handleMoviesSearch)
-	}, [searchMovies, searchParams, loadData, location.pathname, setSearchParams])
+	}, [searchMovies, searchParams, location.pathname, setSearchParams])
 
     return (
         <>
 			<Header />
 			<div className='main'>
-				<div className='d-flex space-between mb-2 nav'>
+				<div className='d-flex align-center space-between mb-2 nav'>
 					<GenreSelect genres={genres} />
 					<SortControl />
 				</div>
 				<p className="text-left mb-2"><b>{moviesData?.totalAmount}</b> movies found</p>
-				<div className="d-flex movies-grid">
+				<div className="d-flex align-center movies-grid">
 					{movies?.map((movie) =>
 						<MovieTile key={movie.id} details={movie} />
 					)}

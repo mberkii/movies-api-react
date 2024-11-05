@@ -12,6 +12,55 @@ textarea {
 #genre {
     background-color: #323232F2;
     height: 56px;
-    padding: 16px;
     border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    z-index: 99;
+}
+
+#genre option {
+    color: inherit;
+    background-color: #323232F2;
+    cursor: pointer;
+}
+
+#genre option:first-child {
+    padding: 19px;
+    position: relative;
+}
+
+#genre option:not(:first-child) {
+    padding: 8px 19px;
+}
+
+#genre option:first-child::after {
+    content: '\25be';
+    color: #F65261;
+    font-size: 28px;
+    position: absolute;
+    top: 11px;
+    right: 4px;
+    cursor: pointer;
+}
+
+#genre:has(option:checked) {
+    overflow: visible;
+    margin-bottom: 38px;
+}
+
+#genre option:first-child:checked::after {
+    transform: rotate(180deg);
+}
+
+#genre option:not(:first-child):checked {
+    display: inline-block;
+    margin-top: 4px;
+}
+
+#genre option:not(:first-child):not(:checked) {
+    display: none;
+}
+
+#genre option:first-child:checked ~ option {
+    display: block;
 }
