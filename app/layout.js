@@ -8,7 +8,6 @@ export const metadata = {
 };
 
 export default function RootLayout({ children, movies, header }) {
-	console.log(children, movies, header)
 	return (
 		<html lang="en">
 		<body className="App">
