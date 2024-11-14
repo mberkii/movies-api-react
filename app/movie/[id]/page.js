@@ -1,6 +1,6 @@
-import { getMovie, formatRuntime } from '../../src/utils'
+import { getMovie, formatRuntime } from '../../../src/utils'
 
-import '../../src/components/movie-details/style.css'
+import '../../../src/components/movie-details/style.css'
 
 export async function generateStaticParams() {
     const res = await fetch('http://localhost:4000/movies')

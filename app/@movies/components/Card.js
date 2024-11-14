@@ -6,7 +6,7 @@ const Card = ({details}) => (
     <div className='movie-tile'>
         {details && (
             <Link
-                href={`/${details.id}`}
+                href={`/movie/${details.id}`}
             >
                 <img src={details.poster_path} alt={details.title} />
                 <div className='d-flex align-center space-between movie-title'>
