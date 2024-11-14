@@ -59,3 +59,7 @@ export const deleteMovie = async (id) => {
 export const updateMovie = async (data) => {
     return makeApiCall('http://localhost:4000/movies', 'put', data)
 }
+
+export const getMovie = async (id) => {
+    return makeApiCall(`http://localhost:4000/movies/${id}`, 'get')
+}
