@@ -1,0 +1,8 @@
+{
+    "compilerOptions": {
+      "target": "ES6",
+      "outDir": "./build",
+      "allowJs": true
+    },
+    "include": ["./src/**/*.ts", "src/App.js", "src/index.js"]
+}
