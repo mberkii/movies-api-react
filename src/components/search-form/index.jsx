@@ -1,5 +1,7 @@
 import './style.css'
 
+import React from 'react'
+import PropTypes from 'prop-types'
 import { useSearchParams } from 'react-router-dom'
 
 import Button from '../../common/button'
@@ -33,6 +35,10 @@ const SearchForm = ({placeholderText}) => {
             </form>
         </div>
     )
+}
+
+SearchForm.propTypes = {
+    placeholderText: PropTypes.string
 }
 
 export default SearchForm

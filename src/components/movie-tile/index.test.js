@@ -1,8 +1,8 @@
+import React from 'react'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
 import MovieTile from ".";
-import { useSearchParams } from 'react-router-dom';
 
 const mockMovieDetails = {
     id: '000',
@@ -16,6 +16,7 @@ const mockMovieDetails = {
 }
 
 jest.mock('react-router-dom', () => ({
+    // eslint-disable-next-line react/prop-types
     Link: (props) => <div data-testid="link">{props.children}</div>,
     useParams: () => jest.fn().mockReturnValueOnce({}),
     useSearchParams: () => [{get: () => {}}, () => {}],

@@ -43,8 +43,9 @@ const MoviesList = () => {
 			}
 		}
 	
-		window.addEventListener('load', handleMoviesSearch);
-    	return () => window.removeEventListener('load', handleMoviesSearch)
+		window.addEventListener('load', handleMoviesSearch)
+
+    return () => window.removeEventListener('load', handleMoviesSearch)
 	}, [searchMovies, searchParams, location.pathname, setSearchParams])
 
     return (

@@ -1,3 +1,4 @@
+import React from 'react'
 import { render, screen } from '@testing-library/react'
 
 import MoviesList from "."
@@ -14,6 +15,7 @@ const mockMovieDetails = {
 }
 
 jest.mock('react-router-dom', () => ({
+    // eslint-disable-next-line react/prop-types
     Link: (props) => <div>{props.children}</div>,
     Outlet: () => <></>,
     useSearchParams: () => [{get: () => {}}, () => {}],
