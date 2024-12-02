@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "babel-preset-es2015": "^6.24.1",
     "focus-trap-react": "^10.3.0",
+    "next": "^15.0.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.53.1",
@@ -27,7 +28,10 @@
     "cy:open": "cypress open",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "prepare": "husky"
+    "prepare": "husky",
+    "next:dev": "next dev",
+    "next:build": "next build",
+    "next:start": "next start"
   },
   "eslintConfig": {
     "extends": [
@@ -80,8 +84,6 @@
     "prop-types": "^15.8.1",
     "storybook": "^8.3.5",
     "style-loader": "^4.0.0",
-    "typescript": "^5.7.2",
-    "url-loader": "^4.1.1",
     "webpack": "^5.96.1",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.1.0"
