@@ -1,4 +1,6 @@
 import React, {useState} from 'react'
+import PropTypes from 'prop-types'
+
 import { Link, useLocation, useSearchParams } from 'react-router-dom'
 
 import './style.css'
@@ -36,6 +38,10 @@ const MovieTile = ({details}) => {
             )}
         </div>
     )
+}
+
+MovieTile.propTypes = {
+    details: PropTypes.object
 }
 
 export default MovieTile;

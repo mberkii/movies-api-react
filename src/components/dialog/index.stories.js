@@ -1,3 +1,5 @@
+import React from "react"
+
 import Dialog from "."
 import MovieForm from "../movie-form"
 import DeleteNote from "../delete-note"

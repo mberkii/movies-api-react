@@ -1,3 +1,4 @@
+import React from 'react'
 import { render, screen } from '@testing-library/react'
 
 import Header from '.'
@@ -9,6 +10,7 @@ jest.mock('react-router-dom', () => ({
     useLocation: () => ({})
 }))
 
+/* eslint-disable react/display-name */
 jest.mock('../search-form', () => () => <div data-testid="search-form" />)
 jest.mock('../movie-details', () => () => <div data-testid="movie-details" />)
 

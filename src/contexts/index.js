@@ -1,4 +1,5 @@
-import { createContext, useContext, useState, useCallback, useMemo } from 'react'
+import React, { createContext, useContext, useState, useCallback, useMemo } from 'react'
+import PropTypes from 'prop-types'
 
 import { getMoviesData } from '../utils'
 
@@ -63,3 +64,7 @@ export const MoviesProvider = ({children}) => {
 }
 
 export const useMoviesContext = () => useContext(MoviesContext)
+
+MoviesProvider.propTypes = {
+    children: PropTypes.any
+}

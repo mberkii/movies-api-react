@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { createPortal } from 'react-dom'
 import { useNavigate, useLocation } from 'react-router-dom'
 import FocusTrap from 'focus-trap-react'
@@ -26,6 +27,11 @@ const Dialog = ({title, content}) => {
             )}
         </>
     )
+}
+
+Dialog.propTypes = {
+    title: PropTypes.string,
+    content: PropTypes.element
 }
 
 export default Dialog
