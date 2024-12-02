@@ -12,9 +12,8 @@ module.exports = ({ mode } = { mode: "production" }) => ({
 	module: {
 		rules: [
 			{
-				test: /\.jpe?g|png$/,
-				exclude: /node_modules/,
-				use: ["url-loader"]
+				test: /\.png$/,
+				type: 'asset/inline'
 			},
 			{
 			  test: /\.css$/i,
